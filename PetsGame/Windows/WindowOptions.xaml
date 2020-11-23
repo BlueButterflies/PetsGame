@@ -1,0 +1,34 @@
+﻿<Window x:Class="PetsGame.Windows.WindowOptions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PetsGame.Windows"
+        mc:Ignorable="d"
+        Title="Options" Height="200" Width="300"
+        Background="#FFC0ECE8"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        FontFamily="Coblar" FontSize="16"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+    <Border BorderBrush="#FF36F17A" Background="#FFC0ECE8" CornerRadius="2" BorderThickness="6">
+        <Border BorderBrush="#FF17E662" CornerRadius="2" BorderThickness="3" Background="White" Margin="2" >
+            <StackPanel Margin="10">
+                <CheckBox Name="dailyCommentsCheked" Margin="0,10,0,5" Foreground="#FF0A0AB2">
+                    Daily comments
+                </CheckBox>
+                <TextBlock Margin="0 10 0 5" Foreground="#FF0A0AB2">
+                    Default pet's name;
+                </TextBlock>
+                <TextBox Name="petName" Margin="0,10" Foreground="#FF0A0AB2">
+                    Rex
+                </TextBox>
+                <Button Click="Button_Click" Width="60" Background="#FF4FBEF1" Foreground="#FFFB1F1F">
+                    ✔
+                </Button>
+            </StackPanel>
+        </Border>
+    </Border>
+</Window>
