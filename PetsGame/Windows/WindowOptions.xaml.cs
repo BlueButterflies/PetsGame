@@ -28,12 +28,14 @@ namespace PetsGame.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dailyCommentsCheked.IsChecked = (bool)Settings.Default["dailyComments"];
+            musicCheked.IsChecked = (bool)Settings.Default["music"];
             petName.Text = (string)Settings.Default["default_name"];
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             Settings.Default["dailyComments"] = dailyCommentsCheked.IsChecked;
+            Settings.Default["music"] = musicCheked.IsChecked;
             Settings.Default["default_name"] = petName.Text;
             Settings.Default.Save();
         }

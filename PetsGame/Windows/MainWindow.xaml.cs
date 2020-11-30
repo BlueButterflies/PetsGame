@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetsGame.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;

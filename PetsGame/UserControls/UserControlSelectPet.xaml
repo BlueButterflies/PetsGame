@@ -1,10 +1,6 @@
 ﻿<UserControl x:Class="PetsGame.UserControls.UserControlSelectPet"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PetsGame.UserControls"
-             mc:Ignorable="d"
              Background="#FFC0ECE8"
              Loaded="UserControl_Loaded">
 
@@ -51,7 +47,7 @@
 
         <Style x:Key="StackPanelStyle" TargetType="{x:Type StackPanel}">
 
-            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="Margin" Value="2,0"/>
 
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
@@ -60,13 +56,50 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0">
+                                <Label Foreground="White">
+                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"/>
+                                </Label>
+                            </Border>
+
+                            <Border Grid.Row="1" BorderThickness="5 0 5 5">
+                                <ContentPresenter Margin="1"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="{x:Type Image}">
             <Setter Property="Stretch" Value="None" />
         </Style>
 
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="MaxWidth" Value="225"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
     </UserControl.Resources>
 
-    <Grid Margin="10">
+    <Grid>
 
         <Grid.RowDefinitions>
 
@@ -78,290 +111,405 @@
         <Border Grid.Row="0" BorderBrush="#FF00B5C5" BorderThickness="5" CornerRadius="0 0 10 10" Background="LightGreen" >
 
             <StackPanel Margin="10 0">
-                <TextBlock Text="Choose a pet" HorizontalAlignment="Center" FontWeight="Bold" Width="auto" FontFamily="Ink Free" FontSize="16" Foreground="#FF0C2181"/>
+                <TextBlock Text="Choose a pet" HorizontalAlignment="Center" FontWeight="Bold" Width="auto" FontFamily="Corbel" FontSize="18" Foreground="#FF0C2181"/>
             </StackPanel>
 
         </Border>
 
-        <Grid Name="PropertiesBox" Grid.Row="1">
+        <Grid Name="PropertiesBox" Grid.Row="1" Margin="10 0 10 10">
 
-            <Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
 
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0">
-
-                <TextBlock Name="txt_Intro" TextWrapping="Wrap" Margin="5 0 0 0" FontFamily="Corbel" FontWeight="Bold" FontStyle="Italic" FontSize="14" Foreground="#FF1A0699">
-                   <LineBreak/>
-                    Make your pet 100% happy ❤
-                    <LineBreak/>
-                    Hunger raises by 1 evrery day and decreases ❤
-                    <LineBreak/>
-                    You get 1$ and 1 free hour every day
-                    <LineBreak/>
-                </TextBlock>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-
-                    </Grid.ColumnDefinitions>
-
-                    <Button Grid.Column="0" Click="btn_AddWin_Clicked" Foreground="#FFF3F3F9" BorderBrush="#FF229999" Background="#FF29EA5D" FontWeight="Bold" FontFamily="Corbel" FontSize="14">Add win</Button>
-
-                    <Button Grid.Column="1" Click="btn_ResetResult_Clicked" Foreground="#FFF3F3F9" BorderBrush="#FF229999" Background="#FFDE1E53" FontWeight="Bold" FontFamily="Corbel" FontSize="14">Reset your results</Button>
-
-                    <TextBlock Name="Wins" Grid.Column="2" FontFamily="Corbel" FontWeight="Bold" FontSize="16" Foreground="Red" HorizontalAlignment="Center">
-                        <TextBlock.Background>
-                            <ImageBrush/>
-                        </TextBlock.Background>
-                        Wins 0 ❤
-                    </TextBlock>
-
-                </Grid>
-            </StackPanel>
-
-            <GroupBox Grid.Row="1">
-
-                <GroupBox.Header>
-
-                    <Border Grid.Row="0" BorderBrush="#FF00B5C5" CornerRadius="20" Background="Yellow" >
-
-                        <StackPanel Margin="10 0">
-                            <TextBlock Text="Pets" HorizontalAlignment="Center" FontWeight="Bold" Width="auto" FontFamily="Ink Free" FontSize="16" Foreground="#FF0C2181"/>
-                        </StackPanel>
-
-                    </Border>
-
-                </GroupBox.Header>
-
-                <WrapPanel>
-
-                    <StackPanel Name="puppy" Style="{StaticResource StackPanelStyle}">
-
-                        <Border BorderThickness="5" CornerRadius="10" BorderBrush="Orange">
-
-                            <Image Source="/PetsGame;component/Images/puppy.png"></Image>
-
-                        </Border>
-
-                        <RadioButton Name="rbtn_puppy" GroupName="Pets" IsChecked="True" Foreground="OrangeRed">
-
-                            <RadioButton.Content>
-
-                                <TextBlock Name="txt_puppy" TextAlignment="Justify" Width="64" HorizontalAlignment="Center" FontFamily="Corbel" FontWeight="Bold" FontSize="14">
-                                Puppy
-                                </TextBlock>
-
-                            </RadioButton.Content>
-
-                        </RadioButton>
-
-                        <TextBlock HorizontalAlignment="Center" FontFamily="Corbel" FontWeight="Bold" Foreground="#FF0810B8" FontSize="14">+5 ❤</TextBlock>
-
-                    </StackPanel>
-
-                    <StackPanel Name="kitty" Style="{StaticResource StackPanelStyle}">
-
-                        <Border BorderThickness="5" CornerRadius="10" BorderBrush="Orange">
-
-                            <Image Source="/PetsGame;component/Images/kitty.png"></Image>
-
-                        </Border>
-
-                        <RadioButton Name="rbtn_kitty" GroupName="Pets" Foreground="OrangeRed" IsEnabled="False">
-
-                            <RadioButton.Content>
-
-                                <TextBlock Name="txt_kitty" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
-                                Kitty
-                                </TextBlock>
-
-                            </RadioButton.Content>
-
-                        </RadioButton>
-
-                        <TextBlock HorizontalAlignment="Center" Foreground="#FF0810B8" FontFamily="Corbel" FontWeight="Bold" FontSize="14">
-                            +1 day 
-                            <LineBreak/>
-                            [5 wins]
-                        </TextBlock>
-
-                    </StackPanel>
-
-                    <StackPanel Name="parrot" Style="{StaticResource StackPanelStyle}">
-
-                        <Border BorderThickness="5" CornerRadius="10" BorderBrush="Orange">
-
-                            <Image Source="/PetsGame;component/Images/parrot.png" Height="94" Width="96" Stretch="Fill"/>
-
-                        </Border>
-
-                        <RadioButton Name="rbtn_parrot" GroupName="Pets" Foreground="OrangeRed" IsEnabled="False">
-
-                            <RadioButton.Content>
-
-                                <TextBlock Name="txt_parrot" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
-                                Parrot
-                                </TextBlock>
-
-                            </RadioButton.Content>
-
-                        </RadioButton>
-
-                        <TextBlock HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="#FF0810B8" FontFamily="Corbel">
-                            hunger -50% weaker
-                            <LineBreak/>
-                            [10wins]
-                        </TextBlock>
-
-                    </StackPanel>
-
-                    <StackPanel Name="hamster" Style="{StaticResource StackPanelStyle}">
-
-                        <Border BorderThickness="5" CornerRadius="10" BorderBrush="Orange">
-
-                            <Image Source="/PetsGame;component/Images/hamster.png" Height="94" Width="96"></Image>
-
-                        </Border>
-
-                        <RadioButton Name="rbtn_hamster" GroupName="Pets" Foreground="OrangeRed" IsEnabled="False">
-
-                            <RadioButton.Content>
-
-                                <TextBlock Name="txt_hamster" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
-                                Hamster
-                                </TextBlock>
-
-                            </RadioButton.Content>
-
-                        </RadioButton>
-
-                        <TextBlock HorizontalAlignment="Center" Foreground="#FF0810B8" FontWeight="Bold" FontFamily="Corbel" FontSize="14">
-                            +10 ❤, -1 day 
-                            <LineBreak/>
-                            [15 wins]
-                        </TextBlock>
-
-                    </StackPanel>
-
-                    <StackPanel Name="panda" Style="{StaticResource StackPanelStyle}">
-
-                        <Border BorderThickness="5" CornerRadius="10" BorderBrush="Orange">
-
-                            <Image Source="/PetsGame;component/Images/panda.png" Height="94" Width="96"></Image>
-
-                        </Border>
-
-                        <RadioButton Name="rbtn_panda" GroupName="Pets" Foreground="OrangeRed" IsEnabled="False">
-
-                            <RadioButton.Content>
-
-                                <TextBlock Name="txt_panda" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
-                                Panda
-                                </TextBlock>
-
-                            </RadioButton.Content>
-
-                        </RadioButton>
-
-                        <TextBlock HorizontalAlignment="Center" Foreground="#FF0810B8" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
-                            +1 ❤ every day 
-                            <LineBreak/>
-                            [20 wins]
-                        </TextBlock>
-
-                    </StackPanel>
-                </WrapPanel>
-            </GroupBox>
-
-            <GroupBox Grid.Row="2">
-
-                <GroupBox.Header>
-
-                    <Border Grid.Row="0" BorderBrush="#FF00B5C5" CornerRadius="20" Background="Gold" >
-
-                        <StackPanel Margin="10 0">
-                            <TextBlock Text="Age" HorizontalAlignment="Center" FontWeight="Bold" Width="auto" FontFamily="Ink Free" FontSize="16" Foreground="#FF0C2181"/>
-                        </StackPanel>
-                    </Border>
-
-                </GroupBox.Header>
-
-                <WrapPanel>
-                    <RadioButton Name="rbtn_oneMonth" IsChecked="true" FontWeight="Bold" FontFamily="Corbel" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,10,0">
-                        <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
-                            <Run BaselineAlignment="Center">1 month</Run>
-                        </TextBlock>
-                    </RadioButton>
-
-                    <RadioButton Name="rbtn_sixMonth" IsEnabled="false" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Margin="0,0,10,0" >
-                        <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
-                            <Run BaselineAlignment="Center">6 month</Run>
-                        </TextBlock>
-                    </RadioButton>
-
-                    <RadioButton Name="rbtn_year" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Width="93" Margin="0,0,10,0" >
-                        <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
-                            <Run BaselineAlignment="Center">1 year</Run>
-                        </TextBlock>
-                    </RadioButton>
-
-                    <TextBlock Name="txt_effects" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Foreground="#FF066C42">
-                        Effects: +1 day , +1 hunger
-                    </TextBlock>
-                </WrapPanel>
-            </GroupBox>
-
-            <Grid Grid.Row="3">
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Name="txt_enterPetName" HorizontalAlignment="Center" Foreground="#FF0D442D" FontFamily="Corbel" FontSize="14" FontWeight="Bold">
+                <StackPanel Grid.Row="0">
+
+                    <TextBlock Name="txt_Intro" TextWrapping="Wrap" Margin="5 0 0 0" FontFamily="Corbel" FontWeight="Bold" FontStyle="Italic" FontSize="14" Foreground="#FF1A0699">
+                   <LineBreak/>
+                    Make your pet 100% happy <Run Foreground="Red">❤</Run>
                     <LineBreak/>
-                    Enter your pet's name
+                    <Image Source="cutlery.png" Stretch="Fill" Width="20" Height="20"></Image> <Run Foreground="Orange">Hunger</Run>
+                        raises by 1 evrery day and decreases <Run Foreground="Red">❤</Run>
                     <LineBreak/>
-                </TextBlock>
+                    You get 1 <Image Source="coins.png" Stretch="Fill" Width="20" Height="20"></Image> <Run Foreground="YellowGreen">coin</Run> and 1 <Image Source="time.png" Stretch="Fill" Width="20" Height="20"></Image><Run Foreground="YellowGreen">free hour</Run> every day
+                    <LineBreak/>
+                    </TextBlock>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" Click="btn_AddWin_Clicked" Width="170" Foreground="#FFF3F3F9" BorderBrush="#FF229999" Background="#FF29EA5D" FontWeight="Bold" FontFamily="Corbel" FontSize="14">Add win</Button>
+
+                        <Button Grid.Column="1" Click="btn_ResetResult_Clicked" Width="170" Foreground="#FFF3F3F9" BorderBrush="#FF229999" Background="#FFDE1E53" FontWeight="Bold" FontFamily="Corbel" FontSize="14">Reset your results</Button>
+
+                        <TextBlock Name="Wins" Grid.Column="2" FontFamily="Corbel" FontWeight="Bold" FontSize="16" Foreground="Red" HorizontalAlignment="Center">
+                            <TextBlock.Background>
+                                <ImageBrush/>
+                            </TextBlock.Background>
+                        Wins 0 ❤
+                        </TextBlock>
+
+                    </Grid>
+                </StackPanel>
 
                 <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
 
-                    <TextBox Grid.Column="0" Name="textBox_name" Margin="30,0,0,0" BorderBrush="#FF2C56D3" SelectionBrush="#FF0961A6" Foreground="#FF07227E" FontFamily="Corbel" FontWeight="Bold" FontSize="14">
-                        Rex
-                    </TextBox>
-                    <TextBlock Grid.Column="1" Name="txt_errorPetName" Foreground="#FFB80606" Margin="0,0,50,0" FontFamily="Corbel" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Visibility="Collapsed">
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Name="txt_enterPetName" HorizontalAlignment="Center" Foreground="#FF0D442D" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Margin="0,5,5,0">
+                        Write your pet's name
+                        </TextBlock>
+
+
+                        <TextBox Grid.Column="1" Name="textBox_name" Height="20"  BorderBrush="#FF2C56D3" SelectionBrush="#FF0961A6" Foreground="#FF07227E" FontFamily="Corbel" FontWeight="Bold" FontSize="14" Margin="5,5,5,0">
+                            Rex
+                        </TextBox>
+                        <TextBlock Grid.Column="2" Name="txt_errorPetName" Foreground="#FFB80606" Margin="0,0,5,0" FontFamily="Corbel" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Visibility="Collapsed">
                         Enter your pet's name!
-                    </TextBlock>
-                    
+                        </TextBlock>
+                    </Grid>
+
+                    <GroupBox Grid.Row="1">
+
+                        <GroupBox.Header>
+
+                            <Border Grid.Row="0" CornerRadius="20" BorderBrush="#FF00B5C5"  Background="Yellow" >
+
+                                <StackPanel Margin="10,0">
+                                    <TextBlock Text="Pets" HorizontalAlignment="Center" FontWeight="Bold" Width="auto" FontFamily="Corbel" FontSize="18" Foreground="#FF0C2181"/>
+                                </StackPanel>
+
+                            </Border>
+
+                        </GroupBox.Header>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Name="puppy"  Style="{StaticResource StackPanelStyle}">
+
+                                <Border  BorderBrush="Orange" CornerRadius="8" BorderThickness="8">
+
+                                    <Image Source="/PetsGame;component/Images/puppy.png"></Image>
+
+                                </Border>
+
+                                <RadioButton Name="rbtn_puppy"  GroupName="Pets" Checked="ChangedPet" IsChecked="True" Foreground="OrangeRed">
+
+                                    <RadioButton.Content>
+
+                                        <TextBlock Name="txt_puppy" TextAlignment="Justify" HorizontalAlignment="Center" FontFamily="Corbel" FontWeight="Bold" FontSize="14">
+                                              Puppy
+                                        </TextBlock>
+
+                                    </RadioButton.Content>
+
+                                </RadioButton>
+
+                                <TextBlock HorizontalAlignment="Center" FontFamily="Corbel" FontWeight="Bold" Foreground="#FF0810B8" FontSize="14">
+                                    +5 ❤
+                                </TextBlock>
+
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="5 WINS" HorizontalAlignment="Center" FontSize="14" Foreground="#FFF07027" FontWeight="Bold">
+                                <TextBlock.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnabled, ElementName=kitty}" Value="False">
+                                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <StackPanel Grid.Column="1" Name="kitty" Style="{StaticResource StackPanelStyle}" IsEnabled="False">
+
+                                <Border CornerRadius="8" BorderThickness="8" BorderBrush="Orange">
+
+                                    <Image Source="/PetsGame;component/Images/kitty.png"></Image>
+
+                                </Border>
+
+                                <RadioButton Name="rbtn_kitty" GroupName="Pets" Checked="ChangedPet" Foreground="OrangeRed" IsEnabled="False">
+
+                                    <RadioButton.Content>
+
+                                        <TextBlock Name="txt_kitty" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
+                                Kitty
+                                        </TextBlock>
+
+                                    </RadioButton.Content>
+
+                                </RadioButton>
+
+                                <TextBlock HorizontalAlignment="Center" Foreground="#FF0810B8" FontFamily="Corbel" FontWeight="Bold" FontSize="14">
+                            +1 day
+                                </TextBlock>
+
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="2" Text="10 WINS" HorizontalAlignment="Center" FontSize="14" Foreground="#FFF07027" FontWeight="Bold">
+                                <TextBlock.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnabled, ElementName=parrot}" Value="False">
+                                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <StackPanel Grid.Column="2" Name="parrot" Style="{StaticResource StackPanelStyle}" IsEnabled="False">
+
+                                <Border CornerRadius="8" BorderThickness="8" BorderBrush="Orange">
+
+                                    <Image Source="/PetsGame;component/Images/parrot.png" Height="96"/>
+
+                                </Border>
+
+                                <RadioButton Name="rbtn_parrot" GroupName="Pets" Checked="ChangedPet" Foreground="OrangeRed" IsEnabled="False">
+
+                                    <RadioButton.Content>
+
+                                        <TextBlock Name="txt_parrot" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
+                                Parrot
+                                        </TextBlock>
+
+                                    </RadioButton.Content>
+
+                                </RadioButton>
+
+                                <TextBlock HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="#FF0810B8" FontFamily="Corbel">
+                            -50% <Image Source="cutlery.png" Stretch="Fill" Width="15" Height="15"></Image>
+                                </TextBlock>
+
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="3" Text="15 WINS" HorizontalAlignment="Center" FontSize="14" Foreground="#FFF07027" FontWeight="Bold">
+                                <TextBlock.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnabled, ElementName=hamster}" Value="False">
+                                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <StackPanel Grid.Column="3" Name="hamster" Style="{StaticResource StackPanelStyle}" IsEnabled="False">
+
+                                <Border CornerRadius="8" BorderThickness="8" BorderBrush="Orange">
+
+                                    <Image Source="/PetsGame;component/Images/hamster.png" ></Image>
+
+                                </Border>
+
+                                <RadioButton Name="rbtn_hamster" GroupName="Pets" Checked="ChangedPet" Foreground="OrangeRed" IsEnabled="False">
+
+                                    <RadioButton.Content>
+
+                                        <TextBlock Name="txt_hamster" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                                Hamster
+                                        </TextBlock>
+
+                                    </RadioButton.Content>
+
+                                </RadioButton>
+
+                                <TextBlock HorizontalAlignment="Center" Foreground="#FF0810B8" FontWeight="Bold" FontFamily="Corbel" FontSize="14">
+                            +10 ❤, -1 day
+                                </TextBlock>
+
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="4" Text="20 WINS" HorizontalAlignment="Center" FontSize="14" Foreground="#FFF07027" FontWeight="Bold">
+                                <TextBlock.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnabled, ElementName=panda}" Value="False">
+                                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <StackPanel Grid.Column="4" Name="panda" Style="{StaticResource StackPanelStyle}" IsEnabled="False" >
+
+                                <Border CornerRadius="8" BorderThickness="8" BorderBrush="Orange">
+
+                                    <Image Source="/PetsGame;component/Images/panda.png"></Image>
+
+                                </Border>
+
+                                <RadioButton Name="rbtn_panda" GroupName="Pets" Checked="ChangedPet" Foreground="OrangeRed" IsEnabled="False">
+
+                                    <RadioButton.Content>
+
+                                        <TextBlock Name="txt_panda" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                                Panda
+                                        </TextBlock>
+
+                                    </RadioButton.Content>
+
+                                </RadioButton>
+
+                                <TextBlock HorizontalAlignment="Center" Foreground="#FF0810B8" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
+                            +1 ❤ every day
+                                </TextBlock>
+
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Row="2">
+
+                        <GroupBox.Header>
+
+                            <Border Grid.Row="0" BorderBrush="#FF00B5C5" CornerRadius="20" Background="Yellow" >
+
+                                <StackPanel Margin="10 0">
+                                    <TextBlock Text="Age" HorizontalAlignment="Center" FontWeight="Bold" Width="auto" FontFamily="Corbel" FontSize="18" Foreground="#FF0C2181"/>
+                                </StackPanel>
+                            </Border>
+
+                        </GroupBox.Header>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0" Name="rbtn_oneMonth" IsChecked="true" FontWeight="Bold" FontFamily="Corbel" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
+                            <Run BaselineAlignment="Center">1 month (+1 day, +1 hunger)</Run>
+                                </TextBlock>
+                            </RadioButton>
+
+                            <RadioButton Grid.Row="1" Name="rbtn_sixMonth" IsEnabled="false" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Margin="0,0,0,5" >
+                                <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
+                            <Run BaselineAlignment="Center">6 month (none)</Run>
+                                </TextBlock>
+                            </RadioButton>
+
+                            <RadioButton Grid.Row="2" Name="rbtn_year" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Margin="0" >
+                                <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
+                            1 year (+1 ❤, -1 day)
+                                </TextBlock>
+                            </RadioButton>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
 
-                <Grid Grid.Row="2">
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <Border BorderThickness="5" MinWidth="100" Margin="0 5 0 0" CornerRadius="10" HorizontalAlignment="Center" Background="LightGreen" BorderBrush="#FF00B5C5">
+                        <StackPanel Margin="10 5">
+                            <TextBlock Name="txtb_petName" Text="{Binding ElementName=textBox_name, Path=Text}" HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="5" CornerRadius="10" BorderBrush="Orange" Margin="5 10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Margin="10" FontFamily="Corbel" FontSize="18" FontWeight="Bold" Foreground="#FFE0A21C" >
+                                    Pet <Run Text="{Binding SelectedPet.Type}"/>
+                                <LineBreak/>
+                                    <Run Text="Special" FontWeight="Bold"/>
+                                    <Run Text="{Binding SelectedPet.Special}"/>
+                                </TextBlock>
+
+                                <Image Grid.Column="1" Name="imgPet" Source="{Binding SelectedPet.ImageSource}"/>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock FontFamily="Corbel" FontSize="14" FontWeight="Bold" Foreground="#FFC38A10" >Age effects:</TextBlock>
+                                    <TextBlock Name="txt_effects" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Foreground="#FF066C42">
+                                          +1 day, +1 hunger
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Grid.Row="1" Text="{Binding SelectedPet.Description}" Margin="10 0" TextAlignment="Justify" FontFamily="Corbel" FontSize="14" FontWeight="Bold" >
+
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-
-                    <Button Name="btn_start" Grid.Column="0" Click="btn_start_Cliked" ToolTip="Start" Width="150" Height="30" Background="#FFF9E517" BorderBrush="#FFBFB70B" Foreground="#FFF3F3F9" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                    <Button Name="btn_start" Grid.Row="0" Grid.Column="0" Click="btn_start_Cliked" ToolTip="Start" Width="140" Height="30" Background="#FFF9E517" BorderBrush="#FFBFB70B" Foreground="#FFF3F3F9" FontSize="14" FontFamily="Corbel" FontWeight="Bold" Margin="0,0,0,10">
                         Start
                     </Button>
 
-                    <Button Name="btn_reset" Grid.Column="1" Click="btn_Restar_Clicked" ToolTip="Default settings" Width="150" Height="30" Background="#FF33F3F3" BorderBrush="#FF1594B0" Foreground="#FFF7FCFD" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                    <Button Name="btn_reset" Grid.Row="0" Grid.Column="1" Click="btn_Restar_Clicked" ToolTip="Default settings" Width="140" Height="30" Background="#FF33F3F3" BorderBrush="#FF1594B0" Foreground="#FFF7FCFD" FontSize="14" FontFamily="Corbel" FontWeight="Bold" Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -373,16 +521,14 @@
                         </Grid>
                     </Button>
 
-                    <Button Name="btn_mainMenu" Grid.Column="2" Click="btn_mainMenu_Cliked" ToolTip="MainMenu" Width="150" Height="30" Background="#FFF98728" BorderBrush="#FFC55E09" Foreground="#FFF6F6F9" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
-                       Menu
+                    <Button Name="btn_mainMenu" Grid.Row="1" Grid.Column="1" Click="btn_mainMenu_Cliked" ToolTip="MainMenu" Width="140" Height="30" Background="#FFF98728" BorderBrush="#FFC55E09" Foreground="#FFF6F6F9" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                        Menu
                     </Button>
-                    <Button Name="btn_exit" Grid.Column="3" Click="btn_exit_Cliked" ToolTip="Exit the game" Width="150" Height="30" Background="#FFE45252" BorderBrush="#FF850F0F" Foreground="#FFF6F7FB" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                    <Button Name="btn_exit" Grid.Row="1" Grid.Column="0" Click="btn_exit_Cliked" ToolTip="Exit the game" Width="140" Height="30" Background="#FFE45252" BorderBrush="#FF850F0F" Foreground="#FFF6F7FB" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
                         Exit
                     </Button>
                 </Grid>
             </Grid>
         </Grid>
-
     </Grid>
-
 </UserControl>

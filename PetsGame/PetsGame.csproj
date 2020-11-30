@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Animals.cs" />
     <Compile Include="UserControls\UserControlGame.xaml.cs">
       <DependentUpon>UserControlGame.xaml</DependentUpon>
     </Compile>
@@ -66,6 +67,9 @@
     </Compile>
     <Compile Include="UserControls\UserControlSelectPet.xaml.cs">
       <DependentUpon>UserControlSelectPet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectLanguage.xaml.cs">
+      <DependentUpon>SelectLanguage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WindowOptions.xaml.cs">
       <DependentUpon>WindowOptions.xaml</DependentUpon>
@@ -91,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\UserControlMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,6 +158,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UserControls\reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\cutlery %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\coins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\cutlery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\kitty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

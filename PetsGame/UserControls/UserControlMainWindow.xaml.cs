@@ -1,4 +1,5 @@
-﻿using PetsGame.UserControls;
+﻿using PetsGame.Properties;
+using PetsGame.UserControls;
 using PetsGame.Windows;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -28,6 +30,8 @@ namespace PetsGame
         {
         }
 
+        private MediaPlayer player = new MediaPlayer();
+
         public UserControlMainWindow()
         {
             InitializeComponent();
@@ -35,40 +39,61 @@ namespace PetsGame
             Version versions = Assembly.GetExecutingAssembly().GetName().Version;
             text_version.Text = string.Format($"Version {versions.Major}.{versions.Minor}.{versions.Build}");
 
-            text_version.Visibility = Visibility.Collapsed;
+            text_version.Visibility = Visibility.Visible;
+
+            player.Open(new Uri(string.Format($"{AppDomain.CurrentDomain.BaseDirectory}//backroundMusic.mp3")));
+            player.MediaEnded += new EventHandler(MediaEndeds);
+
+            if ((bool)Settings.Default["music"] == true)
+            {
+                player.Play();
+            }
+        }
+
+        private void MediaEndeds(object sender, EventArgs e)
+        {
+            if ((bool)Properties.Settings.Default["music"] == true)
+            {
+                player.Position = TimeSpan.Zero;
+                player.Play();
+            }
         }
 
         private void btn_Play_Click(object sender, RoutedEventArgs e)
         {
-            this.Content = new UserControlSelectPet();
+           this.Content = new UserControlSelectPet();
         }
 
         private void btn_Options_Click(object sender, RoutedEventArgs e)
         {
-            WindowOptions options = new WindowOptions();
+            this.Opacity = 0.4;
+            this.Effect = new BlurEffect();
+
+            WindowOptions options = new WindowOptions()
+            {
+                Owner = Parent as Window,
+                ShowInTaskbar = false
+            };
+
             options.ShowDialog();
-        }
 
-        private void btn_Creators_Click(object sender, RoutedEventArgs e)
-        {
+            this.Opacity = 1;
+            this.Effect = null;
 
+            if ((bool)Settings.Default["music"] == false)
+            {
+                player.Stop();
+            }
+            else
+            {
+                player.Position = TimeSpan.Zero;
+                player.Play();
+            }
         }
 
         private void btn_Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void btn_Version_Click(object sender, RoutedEventArgs e)
-        {
-            if (text_version.Visibility == Visibility.Visible)
-            {
-                text_version.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                text_version.Visibility = Visibility.Visible;
-            }
         }
 
         private void btn_Feedback_Click(object sender, RoutedEventArgs e)
