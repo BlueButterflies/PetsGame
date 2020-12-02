@@ -61,7 +61,7 @@ namespace PetsGame
 
         private void btn_Play_Click(object sender, RoutedEventArgs e)
         {
-           this.Content = new UserControlSelectPet();
+            (Parent as Window).Content = new UserControlSelectPet();
         }
 
         private void btn_Options_Click(object sender, RoutedEventArgs e)
@@ -104,6 +104,7 @@ namespace PetsGame
                 // 1. mailto = url;
                 // 2. subject = txtSubject.Text;
                 // 3. body = txtBody.Text;
+
                 Process.Start("mailto:dsvk23020818@outlook.it?subject=GamePets&body=test");
             }
             catch (Exception ex)

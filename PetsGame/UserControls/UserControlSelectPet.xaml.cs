@@ -21,224 +21,258 @@ namespace PetsGame.UserControls
     /// Interaction logic for UserControlSelectPet.xaml
     /// </summary>
     public partial class UserControlSelectPet : UserControl
+    {
+        #region Variables
+        private int mWins;
 
-    #region Variables
-        int wins;
-        int day = 20;
-        int happiness = 15;
-        int hunger = 0;
-        int hungerModifier = 2;
-        int happyBonus = 0;
-        string petName = "";
+        /// <summary>
+        /// Total days in the game by default.Cannot be negarive.
+        /// </summary>
+        private int totalDays = 20;
+        private int mHappiness = 15;
+        private int mHunger = 0;
+        private int mHungerModifier = 2;
+        private int mHappinessBonus = 0;
+        private string mPetName = "";
         #endregion
 
-    #region Loading game
-    public UserControlSelectPet()
-    {
-        InitializeComponent();
+        #region Propperties              
+        public Animals SelectedPet { get; set; }
+        #endregion
 
-        rbtn_oneMonth.Checked += AgeChoice_CheckedChanged;
-        rbtn_sixMonth.Checked += AgeChoice_CheckedChanged;
-        rbtn_year.Checked += AgeChoice_CheckedChanged;
-    }
-
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        wins = (int)Settings.Default["wins"];
-
-        Wins.Text = "Wins " + wins + " ❤";
-
-        if (wins >= 1)
+        #region Loading game
+        public UserControlSelectPet()
         {
-            rbtn_sixMonth.IsEnabled = true;
 
-            if (wins >= 2)
+            SelectedPet = new Animals();
+
+            InitializeComponent();
+
+            rbtn_oneMonth.Checked += AgeChoice_CheckedChanged;
+            rbtn_sixMonth.Checked += AgeChoice_CheckedChanged;
+            rbtn_year.Checked += AgeChoice_CheckedChanged;
+
+            DataContext = this;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            mWins = (int)Settings.Default["wins"];
+
+            Wins.Text = "Wins " + mWins + " ❤";
+
+            if (mWins >= 1)
             {
-                rbtn_year.IsEnabled = true;
+                rbtn_sixMonth.IsEnabled = true;
 
-                if (wins >= 5)
+                if (mWins >= 2)
                 {
-                    kitty.IsEnabled = true;
-                    rbtn_kitty.IsEnabled = true;
+                    rbtn_year.IsEnabled = true;
 
-                    if (wins >= 10)
+                    if (mWins >= 5)
                     {
-                        parrot.IsEnabled = true;
-                        rbtn_parrot.IsEnabled = true;
+                        kitty.IsEnabled = true;
+                        rbtn_kitty.IsEnabled = true;
 
-                        if (wins >= 15)
+                        if (mWins >= 10)
                         {
-                            hamster.IsEnabled = true;
-                            rbtn_hamster.IsEnabled = true;
+                            parrot.IsEnabled = true;
+                            rbtn_parrot.IsEnabled = true;
 
-                            if (wins >= 20)
+                            if (mWins >= 15)
                             {
-                                panda.IsEnabled = true;
-                                rbtn_panda.IsEnabled = true;
+                                hamster.IsEnabled = true;
+                                rbtn_hamster.IsEnabled = true;
+
+                                if (mWins >= 20)
+                                {
+                                    panda.IsEnabled = true;
+                                    rbtn_panda.IsEnabled = true;
+                                }
                             }
                         }
                     }
                 }
             }
+            textBox_name.Text = (string)Settings.Default["default_name"];
         }
-        textBox_name.Text = (string)Settings.Default["default_name"];
-    }
-    #endregion
+        #endregion
 
-    #region Restart button
-    private void btn_Restar_Clicked(object sender, RoutedEventArgs e)
-    {
-        RestarGame();
-    }
-
-    private void RestarGame()
-    {
-        this.Content = new UserControlSelectPet();
-    }
-    #endregion
-
-    #region Main Menu button
-    private void btn_mainMenu_Cliked(object sender, RoutedEventArgs e)
-    {
-        Content = new UserControlMainWindow();
-    }
-    #endregion
-
-    #region Exit button
-    private void btn_exit_Cliked(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Shutdown();
-    }
-    #endregion
-
-    #region Add Wins button
-    private void btn_AddWin_Clicked(object sender, RoutedEventArgs e)
-    {
-        wins++;
-
-        Settings.Default["wins"] = wins;
-        Settings.Default.Save();
-
-        Wins.Text = "Wins " + wins + " ❤";
-
-        RestarGame();
-    }
-    #endregion
-
-    #region Reset Result button
-    private void btn_ResetResult_Clicked(object sender, RoutedEventArgs e)
-    {
-        wins = 0;
-
-        Wins.Text = "Wins 0 ❤";
-
-        Settings.Default["wins"] = wins;
-        Settings.Default.Save();
-    }
-    #endregion
-
-    #region Start button
-    private void btn_start_Cliked(object sender, RoutedEventArgs e)
-    {
-        if (textBox_name.Text.Length > 0)
+        #region Restart button
+        private void btn_Restar_Clicked(object sender, RoutedEventArgs e)
         {
-            petName = textBox_name.Text;
+            RestarGame();
+        }
 
-            string petType = " ";
-            string description = "Pet effects: ";
+        private void RestarGame()
+        {
+            (Parent as Window).Content = new UserControlSelectPet();
+        }
+        #endregion
 
-            //Pet choice
-            if (rbtn_puppy.IsChecked == true)
+        #region Main Menu button
+        private void btn_mainMenu_Cliked(object sender, RoutedEventArgs e)
+        {
+            (Parent as Window).Content = new UserControlMainWindow();
+        }
+        #endregion
+
+        #region Exit button
+        private void btn_exit_Cliked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        #endregion
+
+        #region Add Wins button
+        private void btn_AddWin_Clicked(object sender, RoutedEventArgs e)
+        {
+            mWins++;
+
+            Settings.Default["wins"] = mWins;
+            Settings.Default.Save();
+
+            Wins.Text = "Wins " + mWins + " ❤";
+
+            RestarGame();
+        }
+        #endregion
+
+        #region Reset Result button
+        private void btn_ResetResult_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to erase your results and achievements?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                happiness += 5;
+                mWins = 0;
 
-                petType = "puppy";
-                description += "+5 ❤";
+                Wins.Text = "Wins 0 ❤";
+
+                Settings.Default["wins"] = mWins;
+                Settings.Default.Save();
             }
-            else if (rbtn_kitty.IsChecked == true)
+        }
+        #endregion
+
+        #region Start button
+        private void btn_start_Cliked(object sender, RoutedEventArgs e)
+        {
+            if (textBox_name.Text.Length > 0)
             {
-                day += 1;
+                mPetName = textBox_name.Text;
 
-                petType = "kitty";
-                description += "+1 day";
+                string petType = " ";
+                string description = " ";
+
+                //Pet choice
+                if (rbtn_puppy.IsChecked == true)
+                {
+                    mHappiness += 5;
+
+                    petType = "Puppy";
+                    description += "+5 ❤";
+                }
+                else if (rbtn_kitty.IsChecked == true)
+                {
+                    totalDays += 1;
+
+                    petType = "Kitty";
+                    description += "+1 day";
+                }
+                else if (rbtn_parrot.IsChecked == true)
+                {
+                    mHungerModifier -= 1;
+
+                    petType = "Parrot";
+                    description += "-1 hunger -50% weaker";
+                }
+                else if (rbtn_hamster.IsChecked == true)
+                {
+                    mHappiness += 10;
+                    totalDays -= 1;
+
+                    petType = "Hamster";
+                    description += "+10 ❤, -1 day";
+                }
+                else if (rbtn_panda.IsChecked == true)
+                {
+                    mHappinessBonus += 1;
+
+                    petType = "Panda";
+                    description += "+1 ❤ every day";
+                }
+
+
+                string age = " ";
+                //Age choice
+                if (rbtn_oneMonth.IsChecked == true)
+                {
+                    totalDays += 1;
+                    mHunger += 1;
+                    age += "1 month";
+                }
+                else if (rbtn_sixMonth.IsChecked == true)
+                {
+                    age += "6 months";
+                }
+                else if (rbtn_year.IsChecked == true)
+                {
+                    totalDays -= 1;
+                    mHappiness += 1;
+                    age += "12 months";
+                }
+                string description_age = txt_effects.Text.Replace("\n", ", ");
+
+                (Parent as Window).Content = new UserControlGame(mPetName, totalDays, mHappinessBonus, mHunger, mHungerModifier, petType, description, age, description_age);
             }
-            else if (rbtn_parrot.IsChecked == true)
+            else
             {
-                hungerModifier -= 1;
-
-                petType = "parrot";
-                description += "-1 hunger -50% weaker";
-            }
-            else if (rbtn_hamster.IsChecked == true)
-            {
-                happiness += 10;
-                day -= 1;
-
-                petType = "hamster";
-                description += "+10 ❤, -1 day";
-            }
-            else if (rbtn_panda.IsChecked == true)
-            {
-                happyBonus += 1;
-
-                petType = "panda";
-                description += "+1 ❤ every day";
+                txt_errorPetName.Visibility = Visibility.Visible;
             }
 
+        }
+        #endregion
 
-            description += "\nAge: ";
-            //Age choice
+        #region Checked Age Choice
+        private void AgeChoice_CheckedChanged(object sender, RoutedEventArgs e)
+        {
             if (rbtn_oneMonth.IsChecked == true)
             {
-                day += 1;
-                hunger += 1;
-                description += "1 month";
+                txt_effects.Text = "+1 Day\n+1 huger";
             }
             else if (rbtn_sixMonth.IsChecked == true)
             {
-                description += "6 months";
+                txt_effects.Text = "none";
             }
             else if (rbtn_year.IsChecked == true)
             {
-                day -= 1;
-                happiness += 1;
-                description += "12 months";
+                txt_effects.Text = "+1 ❤\n-1 day";
             }
-
-            petName = textBox_name.Text;
-            description += "\nAge " + txt_effects.Text;
-
-            this.Content = new UserControlGame(petName, day, happyBonus, hunger, hungerModifier, petType, description);
         }
-        else
+        #endregion
+
+        private void ChangedPet(object sender, RoutedEventArgs e)
         {
-            txt_errorPetName.Visibility = Visibility.Visible;
+            if (rbtn_puppy.IsChecked == true)
+            {
+                SelectedPet.Type = PetType.Puppy;
+            }
+            else if (rbtn_kitty.IsChecked == true)
+            {
+                SelectedPet.Type = PetType.Kitty;
+            }
+            else if (rbtn_parrot.IsChecked == true)
+            {
+                SelectedPet.Type = PetType.Parrot;
+            }
+            else if (rbtn_hamster.IsChecked == true)
+            {
+                SelectedPet.Type = PetType.Hamster;
+            }
+            else if (rbtn_panda.IsChecked == true)
+            {
+                SelectedPet.Type = PetType.Panda;
+            }
         }
-
-    }
-    #endregion
-
-    #region Checked Age Choice
-    private void AgeChoice_CheckedChanged(object sender, RoutedEventArgs e)
-    {
-        if (rbtn_oneMonth.IsChecked == true)
-        {
-            txt_effects.Text = "+1 Day, +1 huger";
-        }
-        else if (rbtn_sixMonth.IsChecked == true)
-        {
-            txt_effects.Text = "none";
-        }
-        else if (rbtn_year.IsChecked == true)
-        {
-            txt_effects.Text = "+1 ❤, -1 day";
-        }
-    }
-    #endregion
-
-    private void ChangedPet(object sender, RoutedEventArgs e)
-    {
-
     }
 }
 

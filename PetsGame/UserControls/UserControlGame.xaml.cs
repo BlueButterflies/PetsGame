@@ -4,6 +4,7 @@ using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PetsGame.UserControls
 {
@@ -29,7 +30,8 @@ namespace PetsGame.UserControls
         int wins = 0;
         int happiniessForWalk = 13;
         int priceToy = 4;
-        int priceFood = 2;
+        int priceFruits = 2;
+        int priceVegetables = 10;
         int priceBone = 14;
 
         bool bigBone = false;
@@ -57,7 +59,7 @@ namespace PetsGame.UserControls
         #endregion
 
         #region Loading
-        public UserControlGame(string petName, int days, int happyBonus, int hunger, int hungerModifier, string petType, string description)
+        public UserControlGame(string petName, int days, int happyBonus, int hunger, int hungerModifier, string petType, string description, string age, string description_age)
         {
             InitializeComponent();
 
@@ -70,15 +72,22 @@ namespace PetsGame.UserControls
             ImageSourceConverter imgs = new ImageSourceConverter();
             imgPet.SetValue(Image.SourceProperty, imgs.ConvertFromString(string.Format("pack://application:,,,/Images/{0}.png", petType)));
 
-            txt_description.Text = description;
+            txt_effectsPet.Text = description;
+            txt_age.Text = age;
+            txt_typePet.Text = petType;
+
+            rbtnBone.Checked += PriceEffects_CheckedChanged;
+            rbtnToy.Checked += PriceEffects_CheckedChanged;
+            rbtnFruits.Checked += PriceEffects_CheckedChanged;
+            rbtnForage.Checked += PriceEffects_CheckedChanged;
+
+            DataContext = this;
 
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             wins = (int)Settings.Default["wins"];
-
-
 
             #region writing daily message
 
@@ -93,7 +102,8 @@ namespace PetsGame.UserControls
                 {
                     int rand = random.Next(0, arrayList.Count);
 
-                    string str = arrayList[rand].ToString();
+                    string str = "Daily message:\n";
+                    str +=  arrayList[rand].ToString();
 
                     arrayList.RemoveAt(rand);
                     queue.Enqueue(str);
@@ -106,12 +116,12 @@ namespace PetsGame.UserControls
 
             #endregion
 
-            DailyBox.Header = string.Format($"Day: {currentDay}/{mDays}");
+            DailyBox.Text = string.Format($"Day: {currentDay}/{mDays}");
             txt_petsName.Text = namePet;
-            txtb_currentHappiness.Text = string.Format($"❤ {happiness}");
-            txtb_currentmMoney.Text = string.Format($"$ {money}");
-            txtb_currentFreeHours.Text = string.Format($"Free Hours {freeHour}");
-            txtb_currentHunger.Text = string.Format($"Hunger {hungers}");
+            txtb_currentHappiness.Text = happiness.ToString();
+            txtb_currentMoney.Text = money.ToString();
+            txtb_currentFreeHours.Text = freeHour.ToString();
+            txtb_currentHunger.Text = hungers.ToString();
 
             if (queue.Count > 0)
             {
@@ -125,33 +135,11 @@ namespace PetsGame.UserControls
 
         #endregion
 
-        #region Upper Buttons
-        #region Restart button
-        private void btn_restart_Click(object sender, RoutedEventArgs e)
+        #region Menu button
+        private void ShowMenu(object sender, RoutedEventArgs e)
         {
-
-            RestarGame();
+           (Parent as Window).Content = new UserControlMainWindow();
         }
-
-        private void RestarGame()
-        {
-            this.Content = new UserControlSelectPet();
-        }
-        #endregion
-
-        #region Quit to main menu
-        private void btn_mainMenu_Click(object sender, RoutedEventArgs e)
-        {
-            Content = new UserControlMainWindow();
-        }
-        #endregion
-
-        #region Exit button
-        private void btn_exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-        #endregion
         #endregion
 
         #region Play game
@@ -159,10 +147,10 @@ namespace PetsGame.UserControls
         {
             dailyChoiceSpecial.Visibility = Visibility.Hidden;
 
-            txtb_currentHappiness.Text = "❤  " + happiness;
-            txtb_currentHunger.Text = "Hunger " + hungers;
-            txtb_currentmMoney.Text = "$ " + money;
-            txtb_currentFreeHours.Text = "Free hours " + freeHour;
+            txtb_currentHappiness.Text = happiness.ToString();
+            txtb_currentHunger.Text = hungers.ToString();
+            txtb_currentMoney.Text =  money.ToString();
+            txtb_currentFreeHours.Text = freeHour.ToString(); ;
 
             currentDay++;
 
@@ -172,7 +160,7 @@ namespace PetsGame.UserControls
             }
             else
             {
-                DailyBox.Header = string.Format($"Day {currentDay}/{mDays}");
+                DailyBox.Text = string.Format($"Day {currentDay}/{mDays}");
 
                 if (currentDay == mDays)
                 {
@@ -275,15 +263,14 @@ namespace PetsGame.UserControls
         {
             if (rbtnBone.IsChecked == true)
             {
-
                 if (bigBone == false && money >= priceBone)
                 {
                     bigBone = true;
                     hungers = 0;
                     money -= priceBone;
 
-                    txtb_currentHunger.Text = "Hunger " + hungers;
-                    txtb_currentmMoney.Text = "$ " + money;
+                    txtb_currentHunger.Text = hungers.ToString();
+                    txtb_currentMoney.Text = money.ToString();
                 }
 
 
@@ -295,34 +282,58 @@ namespace PetsGame.UserControls
                     bonusHappy += 1;
                     money -= priceToy;
 
-                    txtb_currentmMoney.Text = "$ " + money;
+                    txtb_currentMoney.Text = money.ToString();
 
                 }
 
             }
             else if (rbtnForage.IsChecked == true)
             {
-                if (money >= 10)
+                if (money >= priceVegetables)
                 {
                     modifierHunger -= 1;
-                    money -= 10;
+                    money -= priceVegetables;
 
-                    txtb_currentmMoney.Text = "$ " + money;
+                    txtb_currentMoney.Text =  money.ToString();
                 }
 
             }
             else if (rbtnFruits.IsChecked == true)
             {
-                if (money >= priceFood)
+                if (money >= priceFruits)
                 {
                     hungers -= 2;
-                    money -= priceFood;
+                    money -= priceFruits;
 
-                    txtb_currentmMoney.Text = "$ " + money;
-                    txtb_currentHunger.Text = "Hunger " + hungers;
+                    txtb_currentMoney.Text = money.ToString();
+                    txtb_currentHunger.Text = hungers.ToString();
                 }
             }
         }
         #endregion
+
+        private void PriceEffects_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+
+            if (rbtnBone.IsChecked == true)
+            {
+                txtbPriceEffects.Text = "Price: 14$\nEffects: no more hunger";
+            }
+            else if (rbtnForage.IsChecked == true)
+            {
+                txtbPriceEffects.Text = "Price:Price: 10$\nEffects: hunger is weaker";
+            }
+            else if (rbtnToy.IsChecked == true)
+            {
+                txtbPriceEffects.Text = "price 4$\nEffects: +1 ❤ evrery day";
+
+            }
+            else if (rbtnFruits.IsChecked == true)
+            {
+                txtbPriceEffects.Text = "Price: 2$\nEffects: -2 hunger";
+
+            }
+        }
+
     }
 }
