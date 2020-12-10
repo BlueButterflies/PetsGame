@@ -382,10 +382,10 @@ namespace PetsGame.UserControls
         #region When checked your choice, view effects and price of food or toy
         private void PriceEffects_CheckedChanged(object sender, RoutedEventArgs e)
         {
-
-            if (rbtnBone.IsChecked == true)
+            if (rbtnFruits.IsChecked == true)
             {
-                txtbPriceEffects.Text = "Price: 14$\nEffects: no more hunger";
+                txtbPriceEffects.Text = "Price: 2$\nEffects: -2 hunger";
+
             }
             else if (rbtnForage.IsChecked == true)
             {
@@ -396,10 +396,9 @@ namespace PetsGame.UserControls
                 txtbPriceEffects.Text = "Price 4$\nEffects: +1 ❤ evrery day";
 
             }
-            else if (rbtnFruits.IsChecked == true)
+            else if (rbtnBone.IsChecked == true)
             {
-                txtbPriceEffects.Text = "Price: 2$\nEffects: -2 hunger";
-
+                txtbPriceEffects.Text = "Price: 14$\nEffects: no more hunger";
             }
         }
         #endregion
