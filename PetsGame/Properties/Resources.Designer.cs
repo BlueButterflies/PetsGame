@@ -59,5 +59,122 @@ namespace PetsGame.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pet wants to go for a walk.
+        /// </summary>
+        internal static string commentEight {
+            get {
+                return ResourceManager.GetString("commentEight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pet tore your jacket..
+        /// </summary>
+        internal static string commentEleven {
+            get {
+                return ResourceManager.GetString("commentEleven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can always erase your statistics. (but what for?).
+        /// </summary>
+        internal static string commentFive {
+            get {
+                return ResourceManager.GetString("commentFive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider taking a break..
+        /// </summary>
+        internal static string commentFour {
+            get {
+                return ResourceManager.GetString("commentFour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pet loves you..
+        /// </summary>
+        internal static string commentNine {
+            get {
+                return ResourceManager.GetString("commentNine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pet dreamt of you tonight..
+        /// </summary>
+        internal static string commentOne {
+            get {
+                return ResourceManager.GetString("commentOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pet has woken up..
+        /// </summary>
+        internal static string commentSeven {
+            get {
+                return ResourceManager.GetString("commentSeven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pet have met another pet for the first time..
+        /// </summary>
+        internal static string commentSix {
+            get {
+                return ResourceManager.GetString("commentSix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A big bone is very useful if you&apos;re tired of feeding your pet..
+        /// </summary>
+        internal static string commentTen {
+            get {
+                return ResourceManager.GetString("commentTen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name is very important (e.g. a parrot called Rex is aggressive)..
+        /// </summary>
+        internal static string commentThirteen {
+            get {
+                return ResourceManager.GetString("commentThirteen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There&apos;s a secret pet..
+        /// </summary>
+        internal static string commentThree {
+            get {
+                return ResourceManager.GetString("commentThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never kick your pet..
+        /// </summary>
+        internal static string commentTwelve {
+            get {
+                return ResourceManager.GetString("commentTwelve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play more and win to unlock other pets..
+        /// </summary>
+        internal static string commentTwo {
+            get {
+                return ResourceManager.GetString("commentTwo", resourceCulture);
+            }
+        }
     }
 }

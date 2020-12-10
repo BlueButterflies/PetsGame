@@ -25,15 +25,7 @@ namespace PetsGame.UserControls
         #region Variables
         private int mWins;
 
-        /// <summary>
-        /// Total days in the game by default.Cannot be negarive.
-        /// </summary>
-        private int totalDays = 20;
-        private int mHappiness = 15;
-        private int mHunger = 0;
-        private int mHungerModifier = 2;
-        private int mHappinessBonus = 0;
-        private string mPetName = "";
+        private readonly SinglePet mSinglePet = new SinglePet();
         #endregion
 
         #region Propperties              
@@ -158,7 +150,7 @@ namespace PetsGame.UserControls
         {
             if (textBox_name.Text.Length > 0)
             {
-                mPetName = textBox_name.Text;
+                mSinglePet.petName = textBox_name.Text;
 
                 string petType = " ";
                 string description = " ";
@@ -166,36 +158,36 @@ namespace PetsGame.UserControls
                 //Pet choice
                 if (rbtn_puppy.IsChecked == true)
                 {
-                    mHappiness += 5;
+                    mSinglePet.mHappiness += 5;
 
                     petType = "Puppy";
                     description += "+5 ❤";
                 }
                 else if (rbtn_kitty.IsChecked == true)
                 {
-                    totalDays += 1;
+                    mSinglePet.totalDays += 1;
 
                     petType = "Kitty";
                     description += "+1 day";
                 }
                 else if (rbtn_parrot.IsChecked == true)
                 {
-                    mHungerModifier -= 1;
+                    mSinglePet.hungerModifier -= 1;
 
                     petType = "Parrot";
                     description += "-1 hunger -50% weaker";
                 }
                 else if (rbtn_hamster.IsChecked == true)
                 {
-                    mHappiness += 10;
-                    totalDays -= 1;
+                    mSinglePet.mHappiness += 10;
+                    mSinglePet.totalDays -= 1;
 
                     petType = "Hamster";
                     description += "+10 ❤, -1 day";
                 }
                 else if (rbtn_panda.IsChecked == true)
                 {
-                    mHappinessBonus += 1;
+                    mSinglePet.happyBonus += 1;
 
                     petType = "Panda";
                     description += "+1 ❤ every day";
@@ -206,8 +198,8 @@ namespace PetsGame.UserControls
                 //Age choice
                 if (rbtn_oneMonth.IsChecked == true)
                 {
-                    totalDays += 1;
-                    mHunger += 1;
+                    mSinglePet.totalDays += 1;
+                    mSinglePet.hunger += 1;
                     age += "1 month";
                 }
                 else if (rbtn_sixMonth.IsChecked == true)
@@ -216,13 +208,18 @@ namespace PetsGame.UserControls
                 }
                 else if (rbtn_year.IsChecked == true)
                 {
-                    totalDays -= 1;
-                    mHappiness += 1;
+                    mSinglePet.totalDays -= 1;
+                    mSinglePet.mHappiness += 1;
                     age += "12 months";
                 }
                 string description_age = txt_effects.Text.Replace("\n", ", ");
 
-                (Parent as Window).Content = new UserControlGame(mPetName, totalDays, mHappinessBonus, mHunger, mHungerModifier, petType, description, age, description_age);
+                mSinglePet.petType = petType;
+                mSinglePet.descriptionPet = description;
+                mSinglePet.age = age;
+                mSinglePet.descriptionAge = description_age;
+
+                (Parent as Window).Content = new UserControlGame(mSinglePet);
             }
             else
             {

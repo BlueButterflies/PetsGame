@@ -1,0 +1,68 @@
+﻿<Window x:Class="PetsGame.Windows.WindowMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WindowMenu" 
+        Width="400" 
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        Background="Transparent" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        FontFamily="Corbel" 
+        FontWeight="Bold"
+        UseLayoutRounding="True"
+        AllowsTransparency="True"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Background" Value="#FFFAD8FF"/>
+            
+        </Style> 
+
+    </Window.Resources>
+
+    <Border BorderBrush="#FF12BDF0" Background="#FFF2B8FB" CornerRadius="2" BorderThickness="6">
+            <Border BorderBrush="#FF0363A6" CornerRadius="2" BorderThickness="3"  Margin="2" >
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5, 1">
+                        <GradientStop Color="#FFB8DCFB" Offset="0.0"/>
+                        <GradientStop Color="#FFFDC4F8" Offset="0.5"/>
+                        <GradientStop Color="AliceBlue" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel Margin="10">
+
+                <Button Click="Button_Continue" Content="Continue" Foreground="#FF0A0AB2"/>
+
+                <Button Click="Button_Save" Content="Save" Foreground="#FF0A0AB2"/>
+
+                <Button Name="btn_Restart" Click="btn_Restart_Click" ToolTip="Restart the game">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="reset.png" MaxHeight="20" Stretch="Uniform"/>
+
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="5 0" Text="Restart" Foreground="#FF0A0AB2"/>
+                    </Grid>
+                </Button>
+
+                <Button Name="btn_MainMenu" Click="btn_MainMenu_Click" ToolTip="Return to Main Menu" Foreground="#FF0A0AB2">
+                    <TextBlock VerticalAlignment="Center" Text="Main Menu"/>
+                </Button>
+
+                <Button Click="Button_Exit" Content="Exit Game" Foreground="#FF0A0AB2"/>
+
+                <CheckBox Name="checkBox_Music"  Margin="0 5" Content="Music" FontSize="25" Foreground="#FF0A0AB2"/>
+            </StackPanel>
+        </Border>
+    </Border>
+</Window>

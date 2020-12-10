@@ -4,6 +4,7 @@ using PetsGame.Windows;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -48,6 +49,9 @@ namespace PetsGame
             {
                 player.Play();
             }
+
+            if (File.Exists($"{System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\\save.sav"))
+                btnResume.IsEnabled = true;
         }
 
         private void MediaEndeds(object sender, EventArgs e)
@@ -62,6 +66,32 @@ namespace PetsGame
         private void btn_Play_Click(object sender, RoutedEventArgs e)
         {
             (Parent as Window).Content = new UserControlSelectPet();
+        }
+
+        private void btn_ResumeGame_Click(object sender, RoutedEventArgs e)
+        {
+            SinglePet singlePet = new SinglePet();
+
+            string[] lines = File.ReadAllLines($"{System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\\save.sav");
+
+            singlePet.petName = lines[0];
+            singlePet.totalDays = Convert.ToInt32(lines[1]);
+            singlePet.mHappiness = Convert.ToInt32(lines[2]);
+            singlePet.happyBonus = Convert.ToInt32(lines[3]);
+            singlePet.hunger = Convert.ToInt32(lines[4]);
+            singlePet.hungerModifier = Convert.ToInt32(lines[5]);
+            singlePet.petType = lines[6];
+            singlePet.descriptionPet = lines[7];
+            singlePet.age = lines[8];
+            singlePet.descriptionAge = lines[9];
+
+            (Parent as Window).Content = new UserControlGame(singlePet,
+                Convert.ToInt32(lines[10]),
+                Convert.ToInt32(lines[11]),
+                Convert.ToInt32(lines[12]),
+
+                Convert.ToBoolean(lines[13])
+                );
         }
 
         private void btn_Options_Click(object sender, RoutedEventArgs e)
@@ -91,11 +121,6 @@ namespace PetsGame
             }
         }
 
-        private void btn_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void btn_Feedback_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -112,6 +137,11 @@ namespace PetsGame
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+
+        private void btn_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:PetsGame"
              StartupUri="Windows/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Order is importanr -->
+                <ResourceDictionary Source="Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Styles/RadioButton.xaml"/>
+                <ResourceDictionary Source="Styles/GroupBoxes.xaml"/>
+                <ResourceDictionary Source="Styles/CheckBoxes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

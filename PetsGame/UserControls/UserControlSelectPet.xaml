@@ -5,46 +5,6 @@
              Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
-        <Style TargetType="{x:Type RadioButton}" >
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <BulletDecorator Cursor="Hand">
-                            <!-- Text element -->
-                            <Border Height="Auto" CornerRadius="3" BorderBrush="#FFE2E2E2" BorderThickness="1">
-                                <Grid>
-                                    <ContentPresenter VerticalAlignment="Center" Margin="20 0" />
-
-                                    <!-- Because our border is the switching element, we don't need a bullet -->
-                                    <Border Width="10" Margin="5,0,48,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" HorizontalAlignment="Left"/>
-                                </Grid>
-
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFCFE0F9" Offset="0"/>
-                                        <GradientStop Color="#FFE2E2E2" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-
-                            </Border>
-
-                        </BulletDecorator>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter TargetName="RadioMark" Property="Background" Value="DodgerBlue"/>
-                            </Trigger>
-
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="RadioMark" Property="Visibility" Value="Collapsed"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="StackPanelStyle" TargetType="{x:Type StackPanel}">
 
             <Setter Property="Margin" Value="2,0"/>
@@ -56,47 +16,9 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type GroupBox}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="GroupBox">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-
-                            <Border Grid.Row="0">
-                                <Label Foreground="White">
-                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True"/>
-                                </Label>
-                            </Border>
-
-                            <Border Grid.Row="1" BorderThickness="5 0 5 5">
-                                <ContentPresenter Margin="1"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style TargetType="{x:Type Image}">
             <Setter Property="Stretch" Value="None" />
         </Style>
-
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="18"/>
-        </Style>
-
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="MaxWidth" Value="225"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-
     </UserControl.Resources>
 
     <Grid>
@@ -153,14 +75,12 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Click="btn_AddWin_Clicked" Width="170" Foreground="#FFF3F3F9" BorderBrush="#FF19F92D" Background="#FF036C1F" FontWeight="Bold" FontFamily="Corbel" FontSize="14">Add win</Button>
+                        <Button Grid.Column="0" Click="btn_AddWin_Clicked" Foreground="#FFF3F3F9" BorderBrush="#FF19F92D" Background="#FF036C1F">Add win</Button>
 
-                        <Button Grid.Column="1" Click="btn_ResetResult_Clicked" Width="170" Foreground="#FFF3F3F9" BorderBrush="#FFE40441" Background="#FFD11212" FontWeight="Bold" FontFamily="Corbel" FontSize="14">Reset your results</Button>
+                        <Button Grid.Column="1" Click="btn_ResetResult_Clicked"  Foreground="#FFF3F3F9" BorderBrush="#FFE40441" Background="#FFD11212">Reset wins</Button>
 
                         <TextBlock Name="Wins" Grid.Column="2" FontFamily="Corbel" FontWeight="Bold" FontSize="16" Foreground="Red" HorizontalAlignment="Center">
-                            <TextBlock.Background>
-                                <ImageBrush/>
-                            </TextBlock.Background>
+                         
                         Wins 0 ❤
                         </TextBlock>
 
@@ -231,7 +151,7 @@
 
                                     <RadioButton.Content>
 
-                                        <TextBlock Name="txt_puppy" TextAlignment="Justify" HorizontalAlignment="Center" FontFamily="Corbel" FontWeight="Bold" FontSize="14">
+                                        <TextBlock Name="txt_puppy" TextAlignment="Justify" HorizontalAlignment="Center">
                                               Puppy
                                         </TextBlock>
 
@@ -270,7 +190,7 @@
 
                                     <RadioButton.Content>
 
-                                        <TextBlock Name="txt_kitty" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
+                                        <TextBlock Name="txt_kitty" TextAlignment="Justify">
                                 Kitty
                                         </TextBlock>
 
@@ -309,7 +229,7 @@
 
                                     <RadioButton.Content>
 
-                                        <TextBlock Name="txt_parrot" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" FontFamily="Corbel">
+                                        <TextBlock Name="txt_parrot" TextAlignment="Justify">
                                 Parrot
                                         </TextBlock>
 
@@ -348,7 +268,7 @@
 
                                     <RadioButton.Content>
 
-                                        <TextBlock Name="txt_hamster" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                                        <TextBlock Name="txt_hamster" TextAlignment="Justify">
                                 Hamster
                                         </TextBlock>
 
@@ -387,7 +307,7 @@
 
                                     <RadioButton.Content>
 
-                                        <TextBlock Name="txt_panda" TextAlignment="Justify" HorizontalAlignment="Center" FontSize="14" FontFamily="Corbel" FontWeight="Bold">
+                                        <TextBlock Name="txt_panda" TextAlignment="Justify">
                                 Panda
                                         </TextBlock>
 
@@ -422,19 +342,19 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0" Name="rbtn_oneMonth" IsChecked="true" FontWeight="Bold" FontFamily="Corbel" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5">
+                            <RadioButton Grid.Row="0" Name="rbtn_oneMonth" IsChecked="true" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5">
                                 <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
                             <Run BaselineAlignment="Center">1 month (+1 day, +1 hunger)</Run>
                                 </TextBlock>
                             </RadioButton>
 
-                            <RadioButton Grid.Row="1" Name="rbtn_sixMonth" IsEnabled="false" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Margin="0,0,0,5" >
+                            <RadioButton Grid.Row="1" Name="rbtn_sixMonth" IsEnabled="false" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,5" >
                                 <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
                             <Run BaselineAlignment="Center">6 month (none)</Run>
                                 </TextBlock>
                             </RadioButton>
 
-                            <RadioButton Grid.Row="2" Name="rbtn_year" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Margin="0" >
+                            <RadioButton Grid.Row="2" Name="rbtn_year" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" >
                                 <TextBlock Foreground="#FF066C42" HorizontalAlignment="Center">
                             1 year (+1 ❤, -1 day)
                                 </TextBlock>
@@ -454,7 +374,7 @@
                 <StackPanel Grid.Row="0">
                     <Border BorderThickness="5" MinWidth="100" Margin="0 5 0 0" CornerRadius="10" HorizontalAlignment="Center" Background="#FF04D604" BorderBrush="#FF4250DC">
                         <StackPanel Margin="10 5">
-                            <TextBlock Name="txtb_petName" Text="{Binding ElementName=textBox_name, Path=Text}" Foreground="#FF0C2181" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Corbel"></TextBlock>
+                            <TextBlock Name="txtb_petName" Text="{Binding ElementName=textBox_name, Path=Text}" Foreground="#FF0C2181" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Corbel" FontSize="20"></TextBlock>
                         </StackPanel>
                     </Border>
 
@@ -462,12 +382,12 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -489,7 +409,7 @@
                                     </TextBlock>
                                 </StackPanel>
                             </Grid>
-                            <TextBlock Grid.Row="1" Text="{Binding SelectedPet.Description}" Margin="10 0" TextAlignment="Justify" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Foreground="#FFF74D0E" >
+                            <TextBlock Grid.Row="1" Text="{Binding SelectedPet.Description}" Margin="10 0" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Corbel" FontSize="14" FontWeight="Bold" Foreground="#FFF74D0E" >
 
                             </TextBlock>
                         </Grid>
@@ -506,26 +426,26 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Name="btn_start" Grid.Row="0" Grid.Column="0" Click="btn_start_Cliked" ToolTip="Start" Width="140" Height="30" FontFamily="Corbel" FontWeight="Bold" Margin="0,0,0,10" Background="#FFE0CE16" Foreground="#FFFBF5F5" BorderBrush="#FFF9F9F9">
+                    <Button Name="btn_start" Grid.Row="0" Grid.Column="0" Click="btn_start_Cliked" ToolTip="Start"  Margin="0,0,0,10" Background="#FFE0CE16" Foreground="#FFFBF5F5" BorderBrush="#FFF9F9F9">
                         Start
                     </Button>
 
-                    <Button Name="btn_reset" Grid.Row="0" Grid.Column="1" Click="btn_Restar_Clicked" ToolTip="Default settings" Width="140" Height="30" Background="#FF04E2E2" BorderBrush="#FF1594B0" Foreground="#FFF7FCFD" FontFamily="Corbel" FontWeight="Bold" Margin="0,0,0,10">
+                    <Button Name="btn_reset" Grid.Row="0" Grid.Column="1" Click="btn_Restar_Clicked" ToolTip="Default settings"  Background="#FF04E2E2" Foreground="#FFFBF5F5" BorderBrush="#FFF9F9F9"  Margin="0,0,0,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="reset.png" Stretch="Fill" Width="20" Height="20" RenderOptions.EdgeMode="Aliased" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0"/>
-                            <TextBlock Grid.Column="1" Margin="5" HorizontalAlignment="Center">Restart</TextBlock>
+                            <Image Grid.Column="0" Source="reset.png" Stretch="Fill" Width="20" Height="20" RenderOptions.EdgeMode="Aliased" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBlock Grid.Column="1" Margin="5" HorizontalAlignment="Center" FontSize="20">Restart</TextBlock>
                         </Grid>
                     </Button>
 
-                    <Button Name="btn_mainMenu" Grid.Row="1" Grid.Column="1" Click="btn_mainMenu_Cliked" ToolTip="MainMenu" Width="140" Height="30" Background="#FFF77D17" BorderBrush="#FFC55E09" Foreground="#FFF6F6F9"  FontFamily="Corbel" FontWeight="Bold">
+                    <Button Name="btn_mainMenu" Grid.Row="1" Grid.Column="1" Click="btn_mainMenu_Cliked" ToolTip="Menu"  Background="#FFF77D17" Foreground="#FFFBF5F5" BorderBrush="#FFF9F9F9" >
                         Menu
                     </Button>
-                    <Button Name="btn_exit" Grid.Row="1" Grid.Column="0" Click="btn_exit_Cliked" ToolTip="Exit the game" Width="140" Height="30" Background="#FFC90C0C" BorderBrush="#FF850F0F" Foreground="#FFF6F7FB"  FontFamily="Corbel" FontWeight="Bold">
+                    <Button Name="btn_exit" Grid.Row="1" Grid.Column="0" Click="btn_exit_Cliked" ToolTip="Exit the game"  Background="#FFC90C0C" Foreground="#FFFBF5F5" BorderBrush="#FFF9F9F9">
                         Exit
                     </Button>
                 </Grid>

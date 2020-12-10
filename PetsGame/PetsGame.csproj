@@ -59,7 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Animals.cs" />
+    <Compile Include="Classes\Animals.cs" />
+    <Compile Include="Classes\SinglePet.cs" />
     <Compile Include="UserControls\UserControlGame.xaml.cs">
       <DependentUpon>UserControlGame.xaml</DependentUpon>
     </Compile>
@@ -69,9 +70,31 @@
     <Compile Include="UserControls\UserControlSelectPet.xaml.cs">
       <DependentUpon>UserControlSelectPet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\WindowFinalResultGame.xaml.cs">
+      <DependentUpon>WindowFinalResultGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WindowMenu.xaml.cs">
+      <DependentUpon>WindowMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WindowOptions.xaml.cs">
       <DependentUpon>WindowOptions.xaml</DependentUpon>
     </Compile>
+    <Page Include="Styles\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\CheckBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\GroupBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\RadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UserControlGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +116,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\UserControlMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WindowFinalResultGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WindowMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,6 +198,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UserControls\kitty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\bone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\toy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\vegetables.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserControls\fruits.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\reset.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PetsGame">
+    
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="5 0"/>
+        <Setter Property="Height" Value="55"/>
+        <Setter Property="Width" Value="165"/>
+        <Setter Property="Padding" Value="9"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Corbel"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#FFF06E15"></Setter>
+        <Setter Property="BorderBrush" Value="AliceBlue"/>
+
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="10"></Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+</ResourceDictionary>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PetsGame"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200"
+             d:DesignHeight="900" d:DesignWidth="1200"
              Background="#FFCFE0F9"
              UseLayoutRounding="True">
 
@@ -15,23 +15,7 @@
             <Setter Property="Margin" Value="10,0"/>
         </Style>
 
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="5 0"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="Width" Value="150"/>
-            <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontFamily" Value="Corbel"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="#FFF06E15"></Setter>
-
-            <Style.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"></Setter>
-                </Style>
-            </Style.Resources>
-        </Style>
+        
     </UserControl.Resources>
 
     <Border Margin="10" BorderThickness="3,3,3,5" CornerRadius="8,8,3,3">
@@ -70,25 +54,33 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Row="0" Content="Play" Click="btn_Play_Click" FontFamily="Corbel" FontWeight="Bold" Margin="10" Padding="9" VerticalContentAlignment="Stretch" VerticalAlignment="Center">
+                    <Button Grid.Row="0" Content="Play" Click="btn_Play_Click"  VerticalContentAlignment="Stretch" VerticalAlignment="Center">
                         <Button.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
                         </Button.BorderBrush>
                     </Button>
-                    <Button Grid.Row="1" Content="Options" Click="btn_Options_Click"  FontWeight="Bold" FontFamily="Corbel" Margin="10" Padding="9" ScrollViewer.CanContentScroll="True" VerticalAlignment="Center">
+                    
+                    <Button Grid.Row="1" Name="btnResume" IsEnabled="False" Content="Resume game" Click="btn_ResumeGame_Click"  VerticalContentAlignment="Stretch" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Button.BorderBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+                        </Button.BorderBrush>
+                    </Button>
+                    
+                    <Button Grid.Row="2" Content="Options" Click="btn_Options_Click"  ScrollViewer.CanContentScroll="True" VerticalAlignment="Center">
                         <Button.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
                         </Button.BorderBrush>
 
                     </Button>
-                    <Button Grid.Row="2" Content="Feedback" Click="btn_Feedback_Click"   FontFamily="Corbel" FontWeight="Bold" Margin="10" Padding="9" UseLayoutRounding="True" VerticalContentAlignment="Stretch" VerticalAlignment="Center">
+                    <Button Grid.Row="3" Content="Feedback" Click="btn_Feedback_Click"  UseLayoutRounding="True" VerticalContentAlignment="Stretch" VerticalAlignment="Center">
                         <Button.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
                         </Button.BorderBrush>
                     </Button>
-                    <Button Grid.Row="3" Content="Exit" Click="btn_Exit_Click"   FontFamily="Corbel" FontWeight="Bold" Margin="10" Padding="9" UseLayoutRounding="True" VerticalContentAlignment="Stretch" VerticalAlignment="Center">
+                    <Button Grid.Row="4" Content="Exit" Click="btn_Exit_Click"  UseLayoutRounding="True" VerticalContentAlignment="Stretch" VerticalAlignment="Center">
                         <Button.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
                         </Button.BorderBrush>
