@@ -68,7 +68,7 @@ namespace PetsGame.Windows
         private void Button_Save(object sender, RoutedEventArgs e)
         {
             // Create new file
-            using (StreamWriter sw = File.CreateText($"C:\\Program Files (x86)\\BlueButterfliesDev\\saveButton.txt"))
+            using (StreamWriter sw = File.CreateText($"save.sav"))
             {
                 sw.WriteLine(mSinglePet.petName);
                 sw.WriteLine(mSinglePet.totalDays);
@@ -88,7 +88,7 @@ namespace PetsGame.Windows
                 sw.WriteLine(mDailySpeciale);
             }
 
-            this.Close();
+            Close();
         }
 
         private void Button_Continue(object sender, RoutedEventArgs e)
