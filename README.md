@@ -4,10 +4,4 @@
 Whenever you choose food for your pet there are effects that are loaded or removed until you win or lose the game.</h3>
 
 <h4>For this app I use C# and Xaml.</h4>
-<p>
-  <a href="https://github.com/BlueButterflies/PetsGame/files/5682806/gemeSetup.zip" download>
-    <h2 align="center">
-      Click to download game to try it!
-    </h2>
-  </a>
-</p>
+
