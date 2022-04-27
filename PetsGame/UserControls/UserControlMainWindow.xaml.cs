@@ -123,20 +123,21 @@ namespace PetsGame
 
         private void btn_Feedback_Click(object sender, RoutedEventArgs e)
         {
+            this.Opacity = 0.4;
+            this.Effect = new BlurEffect();
+            
             try
             {
-                // here i wish set the parameters of email in this way 
-                // 1. mailto = url;
-                // 2. subject = txtSubject.Text;
-                // 3. body = txtBody.Text;
-
                 Process.Start("mailto:dsvk23020818@outlook.it?subject=GamePets&body=test");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             }
 
+            this.Opacity = 1;
+            this.Effect = null;
         }
 
         private void btn_Exit_Click(object sender, RoutedEventArgs e)
